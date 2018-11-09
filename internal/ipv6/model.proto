@@ -1,0 +1,19 @@
+syntax = "proto3";
+package ipv6;
+
+message Address {
+  string network = 1;
+  double latitude = 2;
+  double longitude = 3;
+}
+
+message Filters {
+  double minLatitude = 1;
+  double maxLatitude = 2;
+  double minLongitude = 3;
+  double maxLongitude = 4;
+}
+
+message ListResult {
+  repeated Address results = 1;
+}
