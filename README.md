@@ -1,7 +1,7 @@
 # heatmap
 
 ## Demo
-A demo of this repo can be viewed [here](http://54.82.146.134).
+A demo of this repo can be viewed <a href="http://54.82.146.134" target="_blank">here</a>.
 
 ## Getting Started
 
