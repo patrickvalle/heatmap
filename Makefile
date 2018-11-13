@@ -30,7 +30,8 @@ stop:
 	docker-compose stop
 	
 push:
-	# Push apid to Docker
 	docker build -t patrickvalle/heatmap-apid:latest -f ${APID_DIR}/Dockerfile .
+	docker build -t patrickvalle/heatmap-web:latest -f ${WEB_DIR}/Dockerfile .
 	docker login
 	docker push patrickvalle/heatmap-apid:latest
+	docker push patrickvalle/heatmap-web:latest
