@@ -1,5 +1,10 @@
-body { background: #eee; margin: 0; }
-header { background: #333; padding: 10px 20px 20px; }
-header h1 { color: #fff; font-family: "Oswald", sans-serif; font-size: 3em; margin: 0; text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; }
+html, body { background: #eee; height:100%; margin: 0; }
 
-#map { height: 800px; }
+header { background: #333 url("../img/background.png") repeat-x; padding: 10px 20px 20px; }
+header h1 { color: #fff; font-family: "Oswald", sans-serif; font-size: 3em; margin: 0; text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; }
+header h1 a,
+header h1 a:hover,
+header h1 a:active,
+header h1 a:visited { color: #fff; text-decoration: none; }
+
+#map { bottom: 0; height: calc(100% - 102px); }

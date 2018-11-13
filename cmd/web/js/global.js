@@ -1,7 +1,7 @@
 (function global(L) {
   const DEFAULT_LATITUDE = 35.8750625;
   const DEFAULT_LONGITUDE = -78.84066989999997;
-  const DEFAULT_ZOOM = 12;
+  const DEFAULT_ZOOM = 10;
   const MIN_ZOOM = 2;
   const MAX_ZOOM = 30;
   const HEAT_MODIFIER = 1000;
@@ -15,21 +15,23 @@
   function init() {
     const map = L.map('map').setView([DEFAULT_LATITUDE, DEFAULT_LONGITUDE], DEFAULT_ZOOM).setMinZoom(MIN_ZOOM).setMaxZoom(MAX_ZOOM);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      maxZoom: 18,
+      maxZoom: MAX_ZOOM,
       id: 'mapbox.streets',
       accessToken: 'pk.eyJ1IjoicGF0cmlja3ZhbGxlIiwiYSI6ImNqb2E1ajk1bDAyNWozcm5zbm1rcHZ6NTMifQ.LqzGXiSu0KkbB3SQ7mmZuA',
     }).addTo(map);
 
+    // CSS flex doesn't seem to be working with Leaflet
+
     /**
-     * Fired when a move/resize/load/etc event happens in the map.
+     * Populate the heatmap any time there's... any interaction with the map.
      */
     function onEvent() {
       populateHeatmap(map);
     }
-    map.on('load', onEvent);
     map.on('moveend', onEvent);
     map.on('resize', onEvent);
     map.on('zoomend', onEvent);
+    populateHeatmap(map);
 
     // Attempt to recenter the map around the browser's geo coords.
     fetchGeoCoords().then(function(coords) {
