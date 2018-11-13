@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/tidwall/buntdb"
 
 	"github.com/patrickvalle/heatmap/cmd/apid/config"
 	"github.com/patrickvalle/heatmap/internal/ipv6"
@@ -14,6 +15,7 @@ import (
 // IPV6 represents the IPv6 API method handler set.
 type IPV6 struct {
 	config config.Config
+	db     *buntdb.DB
 }
 
 // List returns a list of IPv6 addresses.
@@ -28,7 +30,7 @@ func (i *IPV6) List(w http.ResponseWriter, r *http.Request, params map[string]st
 	}
 
 	// Get the list of IPv6 addresses.
-	results, err := ipv6.List(filters)
+	results, err := ipv6.List(i.db, filters)
 	if err != nil {
 		log.Printf("ERROR: Failed while listing IPv6 addresses: %s", err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
@@ -36,14 +38,15 @@ func (i *IPV6) List(w http.ResponseWriter, r *http.Request, params map[string]st
 	}
 
 	// Write the response.
-	out, err := proto.Marshal(results)
+	out, err := proto.Marshal(&results)
 	if err != nil {
 		log.Printf("ERROR: Failed while marshalling response: %s", err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/x-protobuf")
+	w.WriteHeader(http.StatusOK)
 	w.Write(out)
 
 	return

@@ -25,10 +25,20 @@
 #   unused-packages = true
 
 
-[[constraint]]
-  name = "github.com/dimfeld/httptreemux"
-  version = "5.0.1"
+
 
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "github.com/dimfeld/httptreemux"
+  version = "5.0.1"
+
+[[constraint]]
+  name = "github.com/tidwall/buntdb"
+  version = "1.0.0"
+
+[[constraint]]
+  name = "github.com/pkg/errors"
+  version = "0.8.0"

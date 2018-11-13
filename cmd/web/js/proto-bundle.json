@@ -1,0 +1,57 @@
+{
+  "nested": {
+    "ipv6": {
+      "nested": {
+        "Address": {
+          "fields": {
+            "latitude": {
+              "type": "double",
+              "id": 1
+            },
+            "longitude": {
+              "type": "double",
+              "id": 2
+            },
+            "count": {
+              "type": "int32",
+              "id": 3
+            }
+          }
+        },
+        "Filters": {
+          "fields": {
+            "minLatitude": {
+              "type": "double",
+              "id": 1
+            },
+            "maxLatitude": {
+              "type": "double",
+              "id": 2
+            },
+            "minLongitude": {
+              "type": "double",
+              "id": 3
+            },
+            "maxLongitude": {
+              "type": "double",
+              "id": 4
+            }
+          }
+        },
+        "ListResult": {
+          "fields": {
+            "results": {
+              "rule": "repeated",
+              "type": "Address",
+              "id": 1
+            },
+            "maxCount": {
+              "type": "int32",
+              "id": 2
+            }
+          }
+        }
+      }
+    }
+  }
+}

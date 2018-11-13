@@ -3,9 +3,17 @@ services:
   apid:
     build:
       context: .
-      dockerfile: ./Dockerfile
-    command: ./CompileDaemon.linux64 --build="go build -o cmd/apid/apid cmd/apid/main.go" --command="./cmd/apid/apid"
+      dockerfile: ./cmd/apid/Dockerfile
+    command: go run cmd/apid/main.go
     env_file:
-      - ./.env
+      - ./common.env
     ports:
-      - "7070:8080"
+      - "7071:8080"
+  web:
+    build:
+      context: .
+      dockerfile: ./cmd/web/Dockerfile
+    env_file:
+      - ./common.env
+    ports:
+      - "7070:80"
